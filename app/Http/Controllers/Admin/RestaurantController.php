@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Restaurant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RestaurantRequest;
 
 class RestaurantController extends Controller
 {
@@ -19,9 +20,11 @@ class RestaurantController extends Controller
     	return view('admin.restaurants.store');
     }
 
-    public function store(Request $request)
+    public function store(RestaurantRequest $request)
     {
     	$restaurantData = ($request -> all());
+
+        $validator = $request->validated();
 
     	$restaurant = new restaurant();
     	$restaurant->create($restaurantData); 
@@ -52,4 +55,5 @@ class RestaurantController extends Controller
 
     	print('Restaurante Removido com sucesso');
 	}
+
 }
